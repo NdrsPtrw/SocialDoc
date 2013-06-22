@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SocialDoc</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="goto_question_button">a?</string>
+    <string-array name="termin1">
+        <item >09:00</item>
+        <item >10:00</item>
+        <item >11:00</item>
+        <item >12:00</item>
+    </string-array>
+    <string-array name="termin2">
+        <item >13:00</item>
+        <item >14:00</item>
+        <item >15:00</item>
+    </string-array>
+    <string-array name="termin3">
+        <item >16:00</item>
+        <item >17:00</item>
+        <item >18:00</item>
+        <item >19:00</item>
+    </string-array>
+    <string-array name="termin4">
+        <item >20:00</item>
+        <item >21:00</item>
+        <item >22:00</item>
+        <item >23:00</item>
+    </string-array>
+        <string name="termin_1">Termin 1:</string>
+        <string name="termin_2">Termin 2:</string>
+        <string name="termin_3">Termin 3:</string>
+        <string name="termin_4">Termin 4:</string>
+        <string name="loudness">Lautstärke</string>
+        <string name="current_sound">Aktueller Klingelton:</string>
+        <string name="led_colour">LED Farbe:</string>
+        <string name="number_of_contacts">Anzahl Kontakte:</string>
+        <string name="hours">Stunden:</string>
+        <string name="minutes">Minuten:</string>
+        <string name="ok">OK</string>
+        <string name="proband_code_info">Informationen</string>
+        <string name="proband_code">Probandencode</string>
+
+</resources>

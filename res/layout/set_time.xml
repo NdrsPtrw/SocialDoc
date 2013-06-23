@@ -69,7 +69,8 @@
             android:layout_weight="1"
             android:contentDescription="@string/termin_3"
             android:entries="@array/termin3"
-            android:prompt="@array/termin3" />
+            android:prompt="@array/termin3"
+                />
 
     </LinearLayout>
 
@@ -101,6 +102,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ok"
-        android:onClick="button_timeset_to_main"/>
+        android:onClick="button_time_ok"/>
 
 </LinearLayout>

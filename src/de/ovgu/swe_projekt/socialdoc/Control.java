@@ -3,6 +3,7 @@ package de.ovgu.swe_projekt.socialdoc;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import java.io.*;
+import java.util.Calendar;
 
 /**
  * Created by Anne-Lena Simon on 09.06.13.
@@ -36,18 +37,50 @@ public class Control {
         _userData.saveUserData(pref);
     }
 
-    public void saveUserInputToCSV() {
+    public boolean createCSV() {
+        saveToCSV("Code;Datum;Alarmzeit;Antwortzeit;Abbruch;Kontakte;Stunden;Minuten", true);
+        return true; //ToDo: return whether file already exists or not
+    }
+
+    public void saveUserInputToCSV(String numContacts, String numHours, String numMinutes) {
+        String day, month, year, date;
+        Calendar c = Calendar.getInstance();
+        day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
+        month = String.valueOf(c.get(Calendar.MONTH));
+        year = String.valueOf(c.get(Calendar.YEAR));
+        date = day+"."+month+"."+year;
+
+        String probandencode = _userData.getProbandenCode();
+
+        //ToDo: remember if the questions were answered for this time
+        String cancelled = "1";
+        //ToDo: remember the current alarm time
+        String currentAlarm = "25:00";
+        //ToDo: remember time the answer was given at
+        String answerTime = "25:30";
+
+        String inputString = probandencode+";"+date+";"+currentAlarm+";"
+                +answerTime+";"+cancelled+";"+numContacts+";"+numHours+";"+numMinutes;
+        saveToCSV(inputString, false);
+    }
+
+    private void saveToCSV(String input, boolean newFile) {
         if( Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ) {
             File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
             FileOutputStream fOut = null;
             try {
                 try {
-                    file = new File(file.getAbsolutePath(), "test.csv");
-                    if (file != null) {
+                    file = new File(file.getAbsolutePath(), "test3.csv");
+                    if ( file.exists() && newFile == false ) {
                         fOut = new FileOutputStream(file, true);
-                        if (fOut != null) {
-                            fOut.write("test\n".getBytes());
-                        }
+                        fOut.write((input+"\n").getBytes());
+                    }
+                    else if( !file.exists() && newFile == true ) {
+                        fOut = new FileOutputStream(file, false);
+                        fOut.write((input+"\n").getBytes());
+                    }
+                    else {
+                        //ToDo: error handling - this state should not occur
                     }
                 } catch (IOException e) {
                     //ToDo: check for exceptions

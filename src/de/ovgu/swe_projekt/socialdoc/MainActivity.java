@@ -4,8 +4,11 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.*;
 
 public class MainActivity extends Activity {
+
+    protected Control _control;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,9 +17,14 @@ public class MainActivity extends Activity {
                                                             abfrageob ein User bereits existiert
                                                             und dann den pasenden View auszusuchen
                                                              */
-        setContentView(R.layout.mainmenu);
-        //setContentView(R.layout.proband_code);
 
+        // set up control
+        _control = new Control(getSharedPreferences("PsyAppPreferences", 0));
+        // TODO: also check if user exists on show, not only on create
+        if( _control.createCSV() )
+            setContentView(R.layout.mainmenu);
+        else
+            setContentView(R.layout.proband_code);
     }
 
 
@@ -41,6 +49,15 @@ public class MainActivity extends Activity {
         setContentView(R.layout.settings);
     }
     public void button_question_ok(View view){
+        String numContacts, numHours, numMinutes;
+        numContacts = getEditText(R.id.editText_contacts);
+        numHours = getEditText(R.id.editText_hours);
+        numMinutes = getEditText(R.id.editText_minutes);
+
+        _control.saveUserInputToCSV(numContacts, numHours, numMinutes);
+
+        //setButtonEnabled(R.id.goto_question_button, false);
+
         setContentView(R.layout.mainmenu);
     }
     public void button_time_ok(View view){
@@ -51,5 +68,15 @@ public class MainActivity extends Activity {
     }
     public void button_proband_ok(View view){
         setContentView(R.layout.mainmenu);
+    }
+
+    private String getEditText(int id){
+        EditText editText = (EditText) findViewById(id);
+        return editText.getText().toString();
+    }
+
+    private void setButtonEnabled(int id, boolean enabled){
+        Button button = (Button)findViewById(id);
+        button.setEnabled(enabled);
     }
 }

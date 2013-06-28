@@ -51,10 +51,10 @@
         android:inputType="number" />
 
     <Button
-        android:id="@+id/button_question"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ok"
-        android:onClick="button_question_ok"/>
+            android:id="@+id/button_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:onClick="button_question_ok"/>
 
 </LinearLayout>

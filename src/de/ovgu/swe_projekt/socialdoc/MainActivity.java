@@ -26,7 +26,10 @@ public class MainActivity extends Activity {
         else
             setContentView(R.layout.proband_code);
     }
-
+    @Override
+    public void onBackPressed() {
+        // do nothing.
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,19 +37,12 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-                                                /*
-                                                Wie man an die textinformationen kommt:
-                                                EditText editText = (EditText) findViewById(R.id.<textfield>);
-                                                editText.getText
-                                                 */
+
     public void button_menu_to_quest(View view){
         setContentView(R.layout.question);
     }
     public void button_menu_to_time(View view){
         setContentView(R.layout.set_time);
-    }
-    public void button_menu_to_settings(View view){
-        setContentView(R.layout.settings);
     }
     public void button_question_ok(View view){
         String numContacts, numHours, numMinutes;
@@ -63,18 +59,16 @@ public class MainActivity extends Activity {
     public void button_time_ok(View view){
         setContentView(R.layout.mainmenu);
     }
-    public void button_settings_ok(View view){
+    public void button_time_back(View view){
         setContentView(R.layout.mainmenu);
     }
     public void button_proband_ok(View view){
         setContentView(R.layout.mainmenu);
     }
-
     private String getEditText(int id){
         EditText editText = (EditText) findViewById(id);
         return editText.getText().toString();
     }
-
     private void setButtonEnabled(int id, boolean enabled){
         Button button = (Button)findViewById(id);
         button.setEnabled(enabled);

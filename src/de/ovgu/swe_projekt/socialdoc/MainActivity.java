@@ -26,7 +26,10 @@ public class MainActivity extends Activity {
         else
             setContentView(R.layout.proband_code);
     }
-
+    @Override
+    public void onBackPressed() {
+        // do nothing.
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,14 +37,12 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     public void button_menu_to_quest(View view){
         setContentView(R.layout.question);
     }
     public void button_menu_to_time(View view){
         setContentView(R.layout.set_time);
-    }
-    public void button_menu_to_settings(View view){
-        setContentView(R.layout.settings);
     }
     public void button_question_ok(View view){
         // todo: check for wrong input! And show a popup and request new input if required!
@@ -61,10 +62,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.mainmenu);
     }
     public void button_time_ok(View view){
+        // todo: get times
         _control.saveUserData(getSharedPreferences("PsyAppPreferences", 0));
         setContentView(R.layout.mainmenu);
     }
-    public void button_settings_ok(View view){
+    public void button_time_back(View view){
         setContentView(R.layout.mainmenu);
     }
     public void button_proband_ok(View view){
@@ -75,12 +77,10 @@ public class MainActivity extends Activity {
         _control.newUser( code );
         setContentView(R.layout.mainmenu);
     }
-
     private String getEditText(int id){
         EditText editText = (EditText) findViewById(id);
         return editText.getText().toString();
     }
-
     private void setButtonEnabled(int id, boolean enabled){
         Button button = (Button)findViewById(id);
         button.setEnabled(enabled);

@@ -39,6 +39,7 @@
         <string name="hours">Stunden:</string>
         <string name="minutes">Minuten:</string>
         <string name="ok">OK</string>
+        <string name="back">Zurück</string>
         <string name="proband_code_info">Informationen</string>
         <string name="proband_code">Probandencode</string>
 

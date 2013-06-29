@@ -64,7 +64,7 @@
 
         <Spinner
             android:id="@+id/spinner_termin3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="@string/termin_3"
@@ -97,11 +97,26 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_set_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ok"
-        android:onClick="button_time_ok"/>
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/button_set_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:onClick="button_time_ok"
+            android:layout_gravity="right|center_vertical"/>
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back"
+                android:id="@+id/button_time_back"
+                android:onClick="button_time_back"
+                android:layout_gravity="center"/>
+    </LinearLayout>
 
 </LinearLayout>

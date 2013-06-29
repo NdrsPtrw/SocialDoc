@@ -48,7 +48,7 @@ public class Control {
         String answerTime = today.format("%H:%M");
 
         //ToDo: remember the current alarm time
-        String currentAlarm = "25:00";
+        String currentAlarm = _userData.getStringOfCurrentAlarmTime();
 
         // get probandencode
         String probandencode = _userData.getProbandenCode();

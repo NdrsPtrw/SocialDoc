@@ -12,7 +12,7 @@ public class UserData {
     // the times the alarm is supposed to happen at
     private int[] _userTimes = {-77,-77,-77,-77};
     // the time the last answer was given and the amount of alarms since that answer
-    private int _lastAnsweredAt = -77, _currentAlarmTime = -77, _alarmsSinceLastAnswer = 0;
+    private int _lastAnsweredAt = 0, _currentAlarmTime = 0, _alarmsSinceLastAnswer = 0;
 
     public UserData() {
     }
@@ -37,7 +37,7 @@ public class UserData {
         _userTimes[3] = -77;
         _lastAnsweredAt = 0;
         _alarmsSinceLastAnswer = 0;
-        // todo: set currentAlarmTime to the first userTime that will cause an Alarm
+        // todo: set currentAlarmTime to the first userTime that will cause an Alarm (Index of array!)
     }
 
     // save the user data
@@ -76,6 +76,9 @@ public class UserData {
 
     public int getCurrentAlarmTime() {
         return this._currentAlarmTime;
+    }
+    public String getStringOfCurrentAlarmTime() {
+        return _userTimes[_currentAlarmTime] + ":00";
     }
 
     public int getAlarmsSinceLastAnswer() {

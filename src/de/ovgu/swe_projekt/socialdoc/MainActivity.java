@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
 
         // set up control
         _control = new Control(getSharedPreferences("PsyAppPreferences", 0));
-        // TODO: also check if user exists on show, not only on create
+        // TODO: also check if user exists on show, not only on create!!
         if( _control.createCSV() )
             setContentView(R.layout.mainmenu);
         else
@@ -34,11 +34,6 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-                                                /*
-                                                Wie man an die textinformationen kommt:
-                                                EditText editText = (EditText) findViewById(R.id.<textfield>);
-                                                editText.getText
-                                                 */
     public void button_menu_to_quest(View view){
         setContentView(R.layout.question);
     }
@@ -49,24 +44,35 @@ public class MainActivity extends Activity {
         setContentView(R.layout.settings);
     }
     public void button_question_ok(View view){
+        // todo: check for wrong input! And show a popup and request new input if required!
         String numContacts, numHours, numMinutes;
         numContacts = getEditText(R.id.editText_contacts);
         numHours = getEditText(R.id.editText_hours);
         numMinutes = getEditText(R.id.editText_minutes);
 
-        _control.saveUserInputToCSV(numContacts, numHours, numMinutes);
+        // todo: on alarm alarmsSinceLastAnswered has to be increased by 1
+        // nextAlarmTime has to be set to next
+        _control.changeLastAnsweredAt();
+        _control.saveUserInputToCSV(false, numContacts, numHours, numMinutes);
+        _control.saveUserData(getSharedPreferences("PsyAppPreferences", 0));
 
         //setButtonEnabled(R.id.goto_question_button, false);
 
         setContentView(R.layout.mainmenu);
     }
     public void button_time_ok(View view){
+        _control.saveUserData(getSharedPreferences("PsyAppPreferences", 0));
         setContentView(R.layout.mainmenu);
     }
     public void button_settings_ok(View view){
         setContentView(R.layout.mainmenu);
     }
     public void button_proband_ok(View view){
+        String code = "";
+        // create probandencode from different parts
+        // ToDo: adjust the view to actually support this and check if all are actually characters
+        // (and not numbers/other symbols)
+        _control.newUser( code );
         setContentView(R.layout.mainmenu);
     }
 

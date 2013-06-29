@@ -3,7 +3,7 @@ package de.ovgu.swe_projekt.socialdoc;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import java.io.*;
-import java.util.Calendar;
+import android.text.format.Time;
 
 /**
  * Created by Anne-Lena Simon on 09.06.13.
@@ -22,10 +22,8 @@ public class Control {
         _userData.setProbandenCode( probandenCode );
     }
 
-    public void changeUserOptions(String option, String value) {
-        if( option.equals("lastTime") ) _userData.setLastAnsweredAt( Integer.valueOf(value) );
-        else
-        if( option.equals("useSignalLight") ) _userData.setUseSignalLight( Boolean.valueOf(value) );
+    public void changeLastAnsweredAt() {
+        _userData.setLastAnsweredAt( _userData.getCurrentAlarmTime() );
     }
 
     public void updateUserTimes( int[] newTimes ) {
@@ -42,31 +40,36 @@ public class Control {
         return true; //ToDo: return whether file already exists or not
     }
 
-    public void saveUserInputToCSV(String numContacts, String numHours, String numMinutes) {
-        String day, month, year, date;
-        Calendar c = Calendar.getInstance();
-        day = String.valueOf(c.get(Calendar.DAY_OF_MONTH));
-        month = String.valueOf(c.get(Calendar.MONTH));
-        year = String.valueOf(c.get(Calendar.YEAR));
-        date = day+"."+month+"."+year;
+    public void saveUserInputToCSV(boolean cancelled, String numContacts, String numHours, String numMinutes) {
+        // create a string containing the current date and one containing the current time
+        Time today = new Time(Time.getCurrentTimezone());
+        today.setToNow();
+        String date = today.format("%d.%m.%Y");
+        String answerTime = today.format("%H:%M");
 
-        String probandencode = _userData.getProbandenCode();
-
-        //ToDo: remember if the questions were answered for this time
-        String cancelled = "1";
         //ToDo: remember the current alarm time
         String currentAlarm = "25:00";
-        //ToDo: remember time the answer was given at
-        String answerTime = "25:30";
+
+        // get probandencode
+        String probandencode = _userData.getProbandenCode();
+
+        String cancelledText = "0";
+        if( cancelled ){
+            cancelledText = "1";
+            answerTime = "-77";
+            numContacts = "-77";
+            numHours = "-77";
+            numMinutes = "-77";
+        }
 
         String inputString = probandencode+";"+date+";"+currentAlarm+";"
-                +answerTime+";"+cancelled+";"+numContacts+";"+numHours+";"+numMinutes;
+                +answerTime+";"+cancelledText+";"+numContacts+";"+numHours+";"+numMinutes;
         saveToCSV(inputString, false);
     }
 
     private void saveToCSV(String input, boolean newFile) {
         if( Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ) {
-            File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File file = Environment.getExternalStorageDirectory();
             FileOutputStream fOut = null;
             try {
                 try {

@@ -237,7 +237,7 @@ public class MainActivity extends Activity {
 
         // alarmanager setzen
         AlarmManager alarmManager= (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 60000, next);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + timeDifference, next);
     }
     private int calcTimeAlarm() {
         Time now = new Time();

@@ -1,5 +1,8 @@
 package de.ovgu.swe_projekt.socialdoc;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -40,6 +43,28 @@ public class MainActivity extends Activity {
     public void onBackPressed() {
         // do nothing.
     }
+    @Override       //Fehlermeldungen
+    protected Dialog onCreateDialog(int id){
+        switch(id){
+            case 10:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
+                builder.setCancelable(true);
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
+        }
+
+
+        return super.onCreateDialog(id);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,6 +86,7 @@ public class MainActivity extends Activity {
         // that means:
         // find out if the last answer was given yesterday or x days ago
         // find out what time the last answer was given at
+        setQuestion("heute schon");
     }
     public void button_menu_to_time(View view){
         setContentView(R.layout.set_time);
@@ -154,5 +180,15 @@ public class MainActivity extends Activity {
             }
             spinner.setSelection(spinnerPosition);
         } catch(NullPointerException ex){}
+    }
+
+    private void setQuestion(String time){
+        String quest = "Mit wie vielen Interaktionspartnern hatten Sie ";
+        quest+=time;
+        quest+=" Kontakt? Schätzen Sie bitte zusätzlich die Gesamtdauer der Kontakte ein.";
+
+
+        TextView text = (TextView) findViewById(R.id.question);
+        text.setText(quest);
     }
 }

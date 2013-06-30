@@ -40,7 +40,19 @@
         <string name="minutes">Minuten:</string>
         <string name="ok">OK</string>
         <string name="back">Zurück</string>
-        <string name="proband_code_info">Informationen</string>
-        <string name="proband_code">Probandencode</string>
+        <string name="proband_code_info">Code-Verschlüsselung:
+        </string>
+        <string name="proband_code">Bitte generieren Sie Ihren Probandencode!
+        </string>
+        <string name="dialog_message">Überprüfe bitte deine Eingabe.</string>
+        <string name="dialog_title">Fehler!</string>
+        <string name="quest">1. Dritter Buchstabe des Vornamens der Mutter
+2. Dritter Buchstabe des Vornamens des Vaters
+3. Dritter Buchstabe des Geburtsortes
+4. Dritter Buchstabe der aktuellen Straße (Hauptwohnsitz)
+5. Dritter Buchstabe des Geburtsmonats
+
+
+        </string>
 
 </resources>

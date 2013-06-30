@@ -23,11 +23,26 @@ public class Control {
     }
 
     public void changeLastAnsweredAt() {
-        _userData.setLastAnsweredAt( _userData.getCurrentAlarmTime() );
+        // todo: setLastAnsweredAt with the string corresponding to _userData.getCurrentAlarmTime()
+        _userData.setLastAnsweredAt( "77:77" );
+        _userData.setLastQuestionWasAnswered(true);
+        _userData.resetAlarmsSinceLastAnswer();
+    }
+
+    public void notAnswered() {
+        // todo: call this!
+        _userData.increaseAlarmsSinceLastAnswer();
     }
 
     public void updateUserTimes( int[] newTimes ) {
         _userData.setUserTimes( newTimes );
+    }
+    public int[] getUserTimes()
+    {
+        return _userData.getUserTimes();
+    }
+    public boolean wasLastQuestionAnswered() {
+        return _userData.wasLastQuestionAnswered();
     }
 
     // call this from activity with parameter "getSharedPreferences("PsyAppPreferences", 0)"
@@ -68,6 +83,9 @@ public class Control {
         String inputString = probandencode+";"+date+";"+currentAlarm+";"
                 +answerTime+";"+cancelledText+";"+numContacts+";"+numHours+";"+numMinutes;
         saveToCSV(inputString, false);
+
+        if(!cancelled)
+            changeLastAnsweredAt();
     }
 
     private boolean saveToCSV(String input, boolean newFile) {
@@ -83,7 +101,7 @@ public class Control {
                      * (add a new row) or not (create the file and write the headers)
                      * also make sure the return value mirrors this
                      */
-                    file = new File(file.getAbsolutePath(), "test4.csv");
+                    file = new File(file.getAbsolutePath(), "test6.csv");
                     if ( file.exists() && !newFile ) {
                         fOut = new FileOutputStream(file, true);
                         fOut.write((input+"\n").getBytes());

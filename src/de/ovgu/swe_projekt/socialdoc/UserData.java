@@ -12,7 +12,11 @@ public class UserData {
     // the times the alarm is supposed to happen at
     private int[] _userTimes = {-77,-77,-77,-77};
     // the time the last answer was given and the amount of alarms since that answer
-    private int _lastAnsweredAt = 0, _currentAlarmTime = 0, _alarmsSinceLastAnswer = 0;
+    private int _currentAlarmTime = 0, _alarmsSinceLastAnswer = 0;
+    // the time the last answer was given
+    String _lastAnsweredAt = "77:77";
+    // was the last question answered?
+    private boolean _lastWasAnswered = false;
 
     public UserData() {
     }
@@ -24,7 +28,7 @@ public class UserData {
         _userTimes[1] = pref.getInt("time2", -77);
         _userTimes[2] = pref.getInt("time3", -77);
         _userTimes[3] = pref.getInt("time4", -77);
-        _lastAnsweredAt = pref.getInt("lastAnswered", 0);
+        _lastAnsweredAt = pref.getString("lastAnswered", "77:77");
         _alarmsSinceLastAnswer =  pref.getInt("alarmsSinceLastAnswered", 0);
     }
 
@@ -35,16 +39,17 @@ public class UserData {
         _userTimes[1] = -77;
         _userTimes[2] = -77;
         _userTimes[3] = -77;
-        _lastAnsweredAt = 0;
+        _lastAnsweredAt = "77:77";
         _alarmsSinceLastAnswer = 0;
-        // todo: set currentAlarmTime to the first userTime that will cause an Alarm (Index of array!)
+        // todo: set this to true as soon as the alarms work!
+        _lastWasAnswered = false;
     }
 
     // save the user data
     public void saveUserData( SharedPreferences pref) {
         SharedPreferences.Editor preferencesEditor = pref.edit();
         preferencesEditor.putString("Probandencode", _probandenCode);
-        preferencesEditor.putInt("lastAnswered", _lastAnsweredAt);
+        preferencesEditor.putString("lastAnswered", _lastAnsweredAt);
         preferencesEditor.putInt("alarmsSinceLastAnswered", _alarmsSinceLastAnswer);
         preferencesEditor.putInt("time1", _userTimes[0]);
         preferencesEditor.putInt("time2", _userTimes[1]);
@@ -65,12 +70,13 @@ public class UserData {
     }
     public void setUserTimes(int[] userTimes) {
         this._userTimes = userTimes;
+        // todo: set alarm to trigger at first possible user time
     }
 
-    public int getLastAnsweredAt() {
+    public String getLastAnsweredAt() {
         return _lastAnsweredAt;
     }
-    public void setLastAnsweredAt(int lastAnsweredAt) {
+    public void setLastAnsweredAt(String lastAnsweredAt) {
         this._lastAnsweredAt = lastAnsweredAt;
     }
 
@@ -89,5 +95,13 @@ public class UserData {
     }
     public void increaseAlarmsSinceLastAnswer() {
         this._alarmsSinceLastAnswer++;
+    }
+
+    public boolean wasLastQuestionAnswered() {
+        return _lastWasAnswered;
+    }
+    public void setLastQuestionWasAnswered(boolean answered){
+        // todo: set to false on alarm
+        _lastWasAnswered = answered;
     }
 }

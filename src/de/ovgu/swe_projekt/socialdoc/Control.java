@@ -10,28 +10,23 @@ import android.text.format.Time;
  */
 public class Control {
 
-    UserData _userData;
+    private UserData _userData;
+    private SharedPreferences _pref;
 
     public Control(SharedPreferences pref) {
         _userData = new UserData();
-        _userData.importSavedUserData(pref);
+        _pref = pref;
+        _userData.importSavedUserData(_pref);
     }
 
     public void newUser( String probandenCode ) {
         _userData.setUserDataToDefault();
         _userData.setProbandenCode( probandenCode );
+        saveUserData();
     }
 
-    public void changeLastAnsweredAt() {
-        // todo: setLastAnsweredAt with the string corresponding to _userData.getCurrentAlarmTime()
-        _userData.setLastAnsweredAt( "77:77" );
-        _userData.setLastQuestionWasAnswered(true);
-        _userData.resetAlarmsSinceLastAnswer();
-    }
-
-    public void notAnswered() {
-        // todo: call this!
-        _userData.increaseAlarmsSinceLastAnswer();
+    public void changeLastAlarm(Time time) {
+        _userData.setLastAlarm(time);
     }
 
     public void updateUserTimes( int[] newTimes ) {
@@ -46,8 +41,8 @@ public class Control {
     }
 
     // call this from activity with parameter "getSharedPreferences("PsyAppPreferences", 0)"
-    public void saveUserData( SharedPreferences pref ) {
-        _userData.saveUserData(pref);
+    public void saveUserData() {
+        _userData.saveUserData(_pref);
     }
 
     public boolean createCSV() {
@@ -64,7 +59,7 @@ public class Control {
         String answerTime = today.format("%H:%M");
 
         // get the time of the current alarm
-        String currentAlarm = _userData.getStringOfCurrentAlarmTime();
+        String currentAlarm = _userData.getTimeAtLastAlarm();
 
         // get probandencode
         String probandencode = _userData.getProbandenCode();
@@ -85,7 +80,7 @@ public class Control {
         saveToCSV(inputString, false);
 
         if(!cancelled)
-            changeLastAnsweredAt();
+            _userData.setLastQuestionWasAnswered(true);
     }
 
     private boolean saveToCSV(String input, boolean newFile) {

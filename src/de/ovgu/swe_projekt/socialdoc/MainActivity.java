@@ -9,10 +9,9 @@ import android.widget.*;
 /* known problem:
  * if the app crashes/is terminated and reopened several alarms later, it will NOT make
  * entries for those alarms in the probandencode.csv
- * it also means that the message (how many interactions since -yesterday- at 11 am) will be wrong
- * we are not going to fix that problem as it would require
- * a redesign of the way we handle the alarms
+ * we are probably not going to fix that problem
  * missing entries can be seen by the "Antwortzeit" and "Datum" entries anyway...
+ * (yes we should fix it, but... ehhhh)
  */
 
 public class MainActivity extends Activity {
@@ -31,9 +30,12 @@ public class MainActivity extends Activity {
             setContentView(R.layout.mainmenu);
             setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
             // todo: set alarm to next possible user time
-        } else
+        } else {
+            _control.saveUserData();
             setContentView(R.layout.proband_code);
+        }
     }
+
     @Override
     public void onBackPressed() {
         // do nothing.
@@ -48,12 +50,9 @@ public class MainActivity extends Activity {
 
     /* todo: on alarm:
      * alarm has to be set so that it will trigger on next alarm time
-     * (first set currentAlarmTime to your time, then set next alarm to currentAlarmTime+1)
-     * call notAnswered if lastWasAnswered is false
-     * set lastWasAnswered to false (if it isn't already)
-     * write to csv, is lastWasAnswered is false
+     * write to csv, if lastWasAnswered is false
      * (saveUserInputToCSV(true, "-77", "-77", "-77"))
-     * CHECK WHICH METHODS ALREADY EXIST! don't blindly add new ones
+     * set lastWasAnswered to false (if it isn't already)
      */
 
     public void button_menu_to_quest(View view){
@@ -81,7 +80,7 @@ public class MainActivity extends Activity {
 
         // nextAlarmTime has to be set to next
         _control.saveUserInputToCSV(false, numContacts, numHours, numMinutes);
-        _control.saveUserData(getSharedPreferences("PsyAppPreferences", 0));
+        _control.saveUserData();
 
         setContentView(R.layout.mainmenu);
         setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
@@ -95,7 +94,7 @@ public class MainActivity extends Activity {
         times[3] = getTimeFromSpinner(R.id.spinner_termin4);
         // and update the user data
         _control.updateUserTimes(times);
-        _control.saveUserData(getSharedPreferences("PsyAppPreferences", 0));
+        _control.saveUserData();
         // then change to main menu
         setContentView(R.layout.mainmenu);
         setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());

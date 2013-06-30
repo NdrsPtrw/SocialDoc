@@ -1,6 +1,7 @@
 package de.ovgu.swe_projekt.socialdoc;
 
 import android.content.SharedPreferences;
+import android.text.format.Time;
 
 /**
  * Created by Anne-Lena Simon on 09.06.13.
@@ -11,10 +12,12 @@ public class UserData {
     private String _probandenCode = "";
     // the times the alarm is supposed to happen at
     private int[] _userTimes = {-77,-77,-77,-77};
-    // the time the last answer was given and the amount of alarms since that answer
-    private int _currentAlarmTime = 0, _alarmsSinceLastAnswer = 0;
-    // the time the last answer was given
-    String _lastAnsweredAt = "77:77";
+    // the exact date and time at last alarm, needed for creating the appropriate question
+    private String _lastAlarm = "xx.xx.xxxx;77:77";
+    // the time the last alarm happened at, needed for writing to csv
+    String _timeAtLastAlarm = "77:77";
+    // the time the last answer was given at, needed for creating the appropriate question
+    String _dateAndTimeAtLastAnswer = "xx.xx.xxxx;77:77";
     // was the last question answered?
     private boolean _lastWasAnswered = false;
 
@@ -28,8 +31,9 @@ public class UserData {
         _userTimes[1] = pref.getInt("time2", -77);
         _userTimes[2] = pref.getInt("time3", -77);
         _userTimes[3] = pref.getInt("time4", -77);
-        _lastAnsweredAt = pref.getString("lastAnswered", "77:77");
-        _alarmsSinceLastAnswer =  pref.getInt("alarmsSinceLastAnswered", 0);
+        _lastAlarm = pref.getString("lastAlarm", "xx.xx.xxxx;77:77");
+        _timeAtLastAlarm =  pref.getString("timeAtLastAlarm", "77:77");
+        _dateAndTimeAtLastAnswer =  pref.getString("dateAndTimeAtLastAnswer", "xx.xx.xxxx;77:77");
     }
 
     // set user data to default values (for new user)
@@ -39,8 +43,9 @@ public class UserData {
         _userTimes[1] = -77;
         _userTimes[2] = -77;
         _userTimes[3] = -77;
-        _lastAnsweredAt = "77:77";
-        _alarmsSinceLastAnswer = 0;
+        _lastAlarm = "xx.xx.xxxx;77:77";
+        _timeAtLastAlarm = "77:77";
+        _dateAndTimeAtLastAnswer = "xx.xx.xxxx;77:77";
         // todo: set this to true as soon as the alarms work!
         _lastWasAnswered = false;
     }
@@ -49,8 +54,9 @@ public class UserData {
     public void saveUserData( SharedPreferences pref) {
         SharedPreferences.Editor preferencesEditor = pref.edit();
         preferencesEditor.putString("Probandencode", _probandenCode);
-        preferencesEditor.putString("lastAnswered", _lastAnsweredAt);
-        preferencesEditor.putInt("alarmsSinceLastAnswered", _alarmsSinceLastAnswer);
+        preferencesEditor.putString("lastAlarm", _lastAlarm);
+        preferencesEditor.putString("timeAtLastAlarm", _timeAtLastAlarm);
+        preferencesEditor.putString("dateAndTimeAtLastAnswer", _dateAndTimeAtLastAnswer);
         preferencesEditor.putInt("time1", _userTimes[0]);
         preferencesEditor.putInt("time2", _userTimes[1]);
         preferencesEditor.putInt("time3", _userTimes[2]);
@@ -62,39 +68,30 @@ public class UserData {
         return _probandenCode;
     }
     public void setProbandenCode(String probandenCode) {
-        this._probandenCode = probandenCode;
+        _probandenCode = probandenCode;
     }
 
     public int[] getUserTimes() {
         return _userTimes;
     }
     public void setUserTimes(int[] userTimes) {
-        this._userTimes = userTimes;
+        _userTimes = userTimes;
         // todo: set alarm to trigger at first possible user time
     }
 
-    public String getLastAnsweredAt() {
-        return _lastAnsweredAt;
+    public String getLastAlarm() {
+        return _lastAlarm;
     }
-    public void setLastAnsweredAt(String lastAnsweredAt) {
-        this._lastAnsweredAt = lastAnsweredAt;
-    }
-
-    public int getCurrentAlarmTime() {
-        return this._currentAlarmTime;
-    }
-    public String getStringOfCurrentAlarmTime() {
-        return _userTimes[_currentAlarmTime] + ":00";
+    public void setLastAlarm(Time lastAlarm) {
+        _lastAlarm = lastAlarm.format("%d.%m.%Y;%H")+":00";
+        _timeAtLastAlarm = lastAlarm.format("%H")+":00";
     }
 
-    public int getAlarmsSinceLastAnswer() {
-        return _alarmsSinceLastAnswer;
+    public String getTimeAtLastAlarm() {
+        return _timeAtLastAlarm;
     }
-    public void resetAlarmsSinceLastAnswer() {
-        this._alarmsSinceLastAnswer = 0;
-    }
-    public void increaseAlarmsSinceLastAnswer() {
-        this._alarmsSinceLastAnswer++;
+    public String getTimeAtLastAnswer() {
+        return _dateAndTimeAtLastAnswer;
     }
 
     public boolean wasLastQuestionAnswered() {

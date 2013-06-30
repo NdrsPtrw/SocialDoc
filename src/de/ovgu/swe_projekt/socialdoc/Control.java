@@ -36,8 +36,9 @@ public class Control {
     }
 
     public boolean createCSV() {
-        saveToCSV("Code;Datum;Alarmzeit;Antwortzeit;Abbruch;Kontakte;Stunden;Minuten", true);
-        return true; //ToDo: return whether file already exists or not
+        boolean fileAlreadyExists;
+        fileAlreadyExists = saveToCSV("Code;Datum;Alarmzeit;Antwortzeit;Abbruch;Kontakte;Stunden;Minuten", true);
+        return fileAlreadyExists;
     }
 
     public void saveUserInputToCSV(boolean cancelled, String numContacts, String numHours, String numMinutes) {
@@ -47,12 +48,13 @@ public class Control {
         String date = today.format("%d.%m.%Y");
         String answerTime = today.format("%H:%M");
 
-        //ToDo: remember the current alarm time
+        // get the time of the current alarm
         String currentAlarm = _userData.getStringOfCurrentAlarmTime();
 
         // get probandencode
         String probandencode = _userData.getProbandenCode();
 
+        // if no answer was given, set values to invalid and save that
         String cancelledText = "0";
         if( cancelled ){
             cancelledText = "1";
@@ -62,25 +64,34 @@ public class Control {
             numMinutes = "-77";
         }
 
+        // create the line to write to the .csv
         String inputString = probandencode+";"+date+";"+currentAlarm+";"
                 +answerTime+";"+cancelledText+";"+numContacts+";"+numHours+";"+numMinutes;
         saveToCSV(inputString, false);
     }
 
-    private void saveToCSV(String input, boolean newFile) {
+    private boolean saveToCSV(String input, boolean newFile) {
+        boolean fileExists = true;
+        // check if there is a storage mounted
         if( Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ) {
+            // get the directory to write to
             File file = Environment.getExternalStorageDirectory();
             FileOutputStream fOut = null;
             try {
                 try {
-                    file = new File(file.getAbsolutePath(), "test3.csv");
-                    if ( file.exists() && newFile == false ) {
+                    /* create a file and write to the file depending on whether it already existed
+                     * (add a new row) or not (create the file and write the headers)
+                     * also make sure the return value mirrors this
+                     */
+                    file = new File(file.getAbsolutePath(), "test4.csv");
+                    if ( file.exists() && !newFile ) {
                         fOut = new FileOutputStream(file, true);
                         fOut.write((input+"\n").getBytes());
                     }
-                    else if( !file.exists() && newFile == true ) {
+                    else if( !file.exists() && newFile ) {
                         fOut = new FileOutputStream(file, false);
                         fOut.write((input+"\n").getBytes());
+                        fileExists = false;
                     }
                     else {
                         //ToDo: error handling - this state should not occur
@@ -108,6 +119,7 @@ public class Control {
             // display error: data not saved
             // have user reenter/give user opportunity to reenter
         }
+        return fileExists;
     }
 
 }

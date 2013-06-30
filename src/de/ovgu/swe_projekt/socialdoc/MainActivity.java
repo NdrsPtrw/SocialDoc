@@ -23,12 +23,16 @@ public class MainActivity extends Activity {
 
         // set up control
         _control = new Control(getSharedPreferences("PsyAppPreferences", 0));
+<<<<<<< HEAD
         // TODO: also check if user exists on show, not only on create
 
     }
     @Override
     protected void onStart(){
         super.onStart();
+=======
+        // TODO: also check if user exists on show, not only on create!!
+>>>>>>> 8e4860bfa8be77e125b82bc623b6a8f89896863c
         if( _control.createCSV() )
             setContentView(R.layout.mainmenu);
         else

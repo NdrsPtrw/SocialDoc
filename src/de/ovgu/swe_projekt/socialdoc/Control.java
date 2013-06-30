@@ -27,6 +27,7 @@ public class Control {
 
     public void changeLastAlarm(Time time) {
         _userData.setLastAlarm(time);
+        _userData.setLastQuestionWasAnswered(false);
     }
 
     public void updateUserTimes( int[] newTimes ) {

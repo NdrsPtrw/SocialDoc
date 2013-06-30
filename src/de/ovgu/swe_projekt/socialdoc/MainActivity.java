@@ -1,10 +1,20 @@
 package de.ovgu.swe_projekt.socialdoc;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.SystemClock;
+import android.os.Vibrator;
+import android.text.format.Time;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
@@ -23,22 +33,37 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         // set up control
         _control = new Control(getSharedPreferences("PsyAppPreferences", 0));
+        super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        try
+        {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+            r.play();
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            v.vibrate(500);
+        }catch (Exception e) {}
+
         // check if a the probandencode.csv exists and create it (and a new user) if it doesn't
-        // TODO: also check if user exists on show, not only on create!!
         if( _control.createCSV() ) {
             setContentView(R.layout.mainmenu);
             setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
-            // todo: set alarm to next possible user time
         } else {
             _control.saveUserData();
             setContentView(R.layout.proband_code);
         }
-    }
 
+        setAlarm(getTimeDifferenceInMillisecs());
+    }
     @Override
     public void onBackPressed() {
         // do nothing.
@@ -73,12 +98,7 @@ public class MainActivity extends Activity {
         return true;
     }
 
-    /* todo: on alarm:
-     * alarm has to be set so that it will trigger on next alarm time
-     * write to csv, if lastWasAnswered is false
-     * (saveUserInputToCSV(true, "-77", "-77", "-77"))
-     * set lastWasAnswered to false (if it isn't already)
-     */
+
 
     public void button_menu_to_quest(View view){
         setContentView(R.layout.question);
@@ -203,5 +223,59 @@ public class MainActivity extends Activity {
 
         TextView text = (TextView) findViewById(R.id.question);
         text.setText(quest);
+    }
+
+    private void setAlarm(long timeDifference){
+        if (!_control.wasLastQuestionAnswered())
+            _control.saveUserInputToCSV(true,"","","");
+        Time now = new Time(Time.getCurrentTimezone());
+        now.setToNow();
+        _control.changeLastAlarm(now);
+        Intent nextActivityIntent = new Intent(this, MainActivity.class);
+
+        PendingIntent next = PendingIntent.getActivity(getApplicationContext(), 0, nextActivityIntent, 0);
+
+        // alarmanager setzen
+        AlarmManager alarmManager= (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 60000, next);
+    }
+    private int calcTimeAlarm() {
+        Time now = new Time();
+        int[] userTimes = _control.getUserTimes().clone();
+        int hourNextAlarm = userTimes[0];
+        int minHourDifference = 24;
+
+        for (int i = 0; i < 3; i++){
+            int temp = userTimes[i] - Integer.parseInt(now.format("%H"));
+            if (temp < minHourDifference && temp > 0){
+                minHourDifference = temp;
+                hourNextAlarm = userTimes[i];
+            }
+        }
+        return hourNextAlarm;
+    }
+
+    public long getTimeDifferenceInMillisecs(){
+
+        // Wenn man davon ausgeht, dass das Array die Uhrzeiten als Int enthält
+        int nextAlarmHour = calcTimeAlarm();
+
+        // Erstellt ein Date von jetzt und dem Alarm
+        Time now = new Time();
+        now.setToNow();
+
+        Time alarmTime = new Time();
+        alarmTime.set(0, 0, nextAlarmHour, now.monthDay, now.month, now.year);
+
+        if(isNextAlarmTomorrow(nextAlarmHour, Integer.parseInt(now.format("%H")))) alarmTime.monthDay+=1;
+
+        // Berechnet den Zeitunterschied in Millisekunden
+        long timeDifference = alarmTime.toMillis(true) - now.toMillis(true);
+
+        return timeDifference;
+
+    }
+    private boolean isNextAlarmTomorrow(int nextAlarmHour, int hourNow){
+        return (hourNow > nextAlarmHour);
     }
 }

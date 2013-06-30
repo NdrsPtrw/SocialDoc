@@ -46,8 +46,7 @@ public class UserData {
         _lastAlarm = "xx.xx.xxxx;77:77";
         _timeAtLastAlarm = "77:77";
         _dateAndTimeAtLastAnswer = "xx.xx.xxxx;77:77";
-        // todo: set this to true as soon as the alarms work!
-        _lastWasAnswered = false;
+        _lastWasAnswered = true;
     }
 
     // save the user data
@@ -98,7 +97,6 @@ public class UserData {
         return _lastWasAnswered;
     }
     public void setLastQuestionWasAnswered(boolean answered){
-        // todo: set to false on alarm
         _lastWasAnswered = answered;
     }
 }

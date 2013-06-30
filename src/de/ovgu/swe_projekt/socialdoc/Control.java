@@ -40,6 +40,15 @@ public class Control {
         return _userData.wasLastQuestionAnswered();
     }
 
+    public boolean isQuestionInputOK(String input){
+        // todo: check the input (format: h:m) -  make sure this much time can have passed since last answer
+        String timeAtLastAnswer = _userData.getTimeAtLastAnswer(); // format: dd.mm.yyyy;hh:mm
+        Time now = new Time(Time.getCurrentTimezone());
+        now.setToNow();
+        // work with day, month, hours, minutes
+        return false;
+    }
+
     // call this from activity with parameter "getSharedPreferences("PsyAppPreferences", 0)"
     public void saveUserData() {
         _userData.saveUserData(_pref);
@@ -107,12 +116,14 @@ public class Control {
                         fileExists = false;
                     }
                     else {
-                        //ToDo: error handling - this state should not occur
+                        //ToDo: error handling - this state should not occur; display error message
+                        // ask user to restart app
+                        throw new IllegalStateException();
                     }
                 } catch (IOException e) {
                     //ToDo: check for exceptions
                     // display error: ask user to restart app -> should create the file
-                    // that functionality HAS to be implemented
+                    throw new IllegalStateException();
                 }
             } finally {
                 if (fOut != null) {
@@ -122,7 +133,7 @@ public class Control {
                     } catch (IOException e) {
                         //ToDo: check for exceptions
                         // display error: ask user to restart app -> should create the file
-                        // that functionality HAS to be implemented
+                        throw new IllegalStateException();
                     }
                 }
             }
@@ -131,6 +142,7 @@ public class Control {
             // TODO: Error handling: No Storage Device Mounted
             // display error: data not saved
             // have user reenter/give user opportunity to reenter
+            throw new IllegalStateException();
         }
         return fileExists;
     }

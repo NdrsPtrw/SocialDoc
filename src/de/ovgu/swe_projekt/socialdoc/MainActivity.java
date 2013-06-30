@@ -98,18 +98,27 @@ public class MainActivity extends Activity {
         setSpinnerToTime(R.id.spinner_termin4, times[3]);
     }
     public void button_question_ok(View view){
-        // todo: check for wrong input! And show a popup and request new input if required!
         String numContacts, numHours, numMinutes;
         numContacts = getEditText(R.id.editText_contacts);
         numHours = getEditText(R.id.editText_hours);
         numMinutes = getEditText(R.id.editText_minutes);
 
-        // nextAlarmTime has to be set to next
-        _control.saveUserInputToCSV(false, numContacts, numHours, numMinutes);
-        _control.saveUserData();
+        // only 60 minutes per hour
+        if( Integer.parseInt(numMinutes) > 59 )
+            return;
+        if( !_control.isQuestionInputOK(numHours+":"+numMinutes) ){
+            // todo: display popup with warning
+            return;
+        }
+        try{
+            _control.saveUserInputToCSV(false, numContacts, numHours, numMinutes);
+            _control.saveUserData();
 
-        setContentView(R.layout.mainmenu);
-        setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
+            setContentView(R.layout.mainmenu);
+            setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
+        } catch(IllegalStateException ex){
+            // do nothing, wait for user to click on the button again
+        }
     }
     public void button_time_ok(View view){
         // get times from spinners
@@ -132,7 +141,7 @@ public class MainActivity extends Activity {
     public void button_proband_ok(View view){
         String code = getEditText(R.id.editText1);
         // create probandencode from different parts
-        // ToDo: adjust the view to actually support this and check if all are actually characters
+        // ToDo: check if all are actually characters
         // (and not numbers/other symbols)
         _control.newUser( code );
         setContentView(R.layout.set_time);

@@ -243,6 +243,7 @@ public class MainActivity extends Activity {
         Time now = new Time();
         int[] userTimes = _control.getUserTimes().clone();
         int hourNextAlarm = userTimes[0];
+        if (hourNextAlarm == -77) return 3;
         int minHourDifference = 24;
 
         for (int i = 0; i < 3; i++){
@@ -252,6 +253,7 @@ public class MainActivity extends Activity {
                 hourNextAlarm = userTimes[i];
             }
         }
+
         return hourNextAlarm;
     }
 

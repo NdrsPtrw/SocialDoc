@@ -139,11 +139,15 @@ public class MainActivity extends Activity {
         setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
     }
     public void button_proband_ok(View view){
-        String code = getEditText(R.id.editText1);
         // create probandencode from different parts
+        String codePart1 = getEditText(R.id.pc_1);
+        String codePart2 = getEditText(R.id.pc_2);
+        String codePart3 = getEditText(R.id.pc_3);
+        String codePart4 = getEditText(R.id.pc_4);
+        String codePart5 = getEditText(R.id.pc_5);
         // ToDo: check if all are actually characters
         // (and not numbers/other symbols)
-        _control.newUser( code );
+        _control.newUser( codePart1+codePart2+codePart3+codePart4+codePart5 );
         setContentView(R.layout.set_time);
     }
 

@@ -46,7 +46,7 @@ public class Control {
         Time now = new Time(Time.getCurrentTimezone());
         now.setToNow();
         // work with day, month, hours, minutes
-        return false;
+        return true;
     }
 
     // call this from activity with parameter "getSharedPreferences("PsyAppPreferences", 0)"
@@ -105,7 +105,7 @@ public class Control {
                      * (add a new row) or not (create the file and write the headers)
                      * also make sure the return value mirrors this
                      */
-                    file = new File(file.getAbsolutePath(), "test6.csv");
+                    file = new File(file.getAbsolutePath(), "test7.csv");
                     if ( file.exists() && !newFile ) {
                         fOut = new FileOutputStream(file, true);
                         fOut.write((input+"\n").getBytes());
@@ -118,12 +118,10 @@ public class Control {
                     else {
                         //ToDo: error handling - this state should not occur; display error message
                         // ask user to restart app
-                        throw new IllegalStateException();
                     }
                 } catch (IOException e) {
                     //ToDo: check for exceptions
                     // display error: ask user to restart app -> should create the file
-                    throw new IllegalStateException();
                 }
             } finally {
                 if (fOut != null) {
@@ -133,7 +131,6 @@ public class Control {
                     } catch (IOException e) {
                         //ToDo: check for exceptions
                         // display error: ask user to restart app -> should create the file
-                        throw new IllegalStateException();
                     }
                 }
             }
@@ -142,7 +139,6 @@ public class Control {
             // TODO: Error handling: No Storage Device Mounted
             // display error: data not saved
             // have user reenter/give user opportunity to reenter
-            throw new IllegalStateException();
         }
         return fileExists;
     }

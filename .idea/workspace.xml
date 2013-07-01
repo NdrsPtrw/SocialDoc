@@ -82,7 +82,7 @@
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <method_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java" line="264" class="de.ovgu.swe_projekt.socialdoc.MainActivity" package="de.ovgu.swe_projekt.socialdoc">
+      <breakpoint url="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java" line="265" class="de.ovgu.swe_projekt.socialdoc.MainActivity" package="de.ovgu.swe_projekt.socialdoc">
         <option name="WATCH_ENTRY" value="true" />
         <option name="WATCH_EXIT" value="true" />
         <option name="ENABLED" value="true" />
@@ -112,7 +112,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="254" column="52" selection-start="9631" selection-end="9631" vertical-scroll-proportion="0.44360903">
+            <state line="255" column="47" selection-start="9679" selection-end="9679" vertical-scroll-proportion="0.44360903">
               <folding />
             </state>
           </provider>
@@ -373,12 +373,12 @@
       <workItem from="1372439603697" duration="3931000" />
       <workItem from="1372613164095" duration="3776000" />
       <workItem from="1372632082391" duration="3941000" />
-      <workItem from="1372652373612" duration="5285000" />
+      <workItem from="1372652373612" duration="5513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25534000" />
+    <option name="totallyTimeSpent" value="25762000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="-8" width="1319" height="784" extended-state="6" />
@@ -618,7 +618,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="254" column="52" selection-start="9631" selection-end="9631" vertical-scroll-proportion="0.44360903">
+        <state line="255" column="47" selection-start="9679" selection-end="9679" vertical-scroll-proportion="0.44360903">
           <folding />
         </state>
       </provider>

@@ -259,6 +259,7 @@ public class MainActivity extends Activity {
 
             }
         }
+
         return hourNextAlarm;
     }
 

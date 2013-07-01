@@ -1,7 +1,5 @@
 package de.ovgu.swe_projekt.socialdoc;
 
-import android.app.AlarmManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.format.Time;
 
@@ -29,13 +27,14 @@ public class UserData {
     // import the user data from the settings
     public void importSavedUserData( SharedPreferences pref) {
         _probandenCode = pref.getString("Probandencode", "");
+        _lastAlarm = pref.getString("lastAlarm", "xx.xx.xxxx;77:77");
+        _timeAtLastAlarm =  pref.getString("timeAtLastAlarm", "77:77");
+        _dateAndTimeAtLastAnswer =  pref.getString("dateAndTimeAtLastAnswer", "xx.xx.xxxx;77:77");
+        _lastWasAnswered = pref.getBoolean("lastQuestionWasAnswered", true);
         _userTimes[0] = pref.getInt("time1", -77);
         _userTimes[1] = pref.getInt("time2", -77);
         _userTimes[2] = pref.getInt("time3", -77);
         _userTimes[3] = pref.getInt("time4", -77);
-        _lastAlarm = pref.getString("lastAlarm", "xx.xx.xxxx;77:77");
-        _timeAtLastAlarm =  pref.getString("timeAtLastAlarm", "77:77");
-        _dateAndTimeAtLastAnswer =  pref.getString("dateAndTimeAtLastAnswer", "xx.xx.xxxx;77:77");
     }
 
     // set user data to default values (for new user)
@@ -58,6 +57,7 @@ public class UserData {
         preferencesEditor.putString("lastAlarm", _lastAlarm);
         preferencesEditor.putString("timeAtLastAlarm", _timeAtLastAlarm);
         preferencesEditor.putString("dateAndTimeAtLastAnswer", _dateAndTimeAtLastAnswer);
+        preferencesEditor.putBoolean("lastQuestionWasAnswered", _lastWasAnswered);
         preferencesEditor.putInt("time1", _userTimes[0]);
         preferencesEditor.putInt("time2", _userTimes[1]);
         preferencesEditor.putInt("time3", _userTimes[2]);

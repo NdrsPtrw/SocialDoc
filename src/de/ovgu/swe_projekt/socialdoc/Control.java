@@ -106,6 +106,7 @@ public class Control {
                      * (add a new row) or not (create the file and write the headers)
                      * also make sure the return value mirrors this
                      */
+                    // todo: rename to probandencode.csv
                     file = new File(file.getAbsolutePath(), "test7.csv");
                     if ( file.exists() && !newFile ) {
                         fOut = new FileOutputStream(file, true);

@@ -30,6 +30,9 @@ import android.widget.*;
 public class MainActivity extends Activity {
 
     protected Control _control;
+    //AlarmManager muss Global verwaltet werden, damit man ihn auch wider löschen kann.
+    //alternativ über UserData
+    protected AlarmManager alarmManager= (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +144,8 @@ public class MainActivity extends Activity {
         }
     }
     public void button_time_ok(View view){
+        //clear Alarm
+        clearAlarm();
         // get times from spinners
         int[] times = new int[4];
         times[0] = getTimeFromSpinner(R.id.spinner_termin1);
@@ -150,10 +155,15 @@ public class MainActivity extends Activity {
         // and update the user data
         _control.updateUserTimes(times);
         _control.saveUserData();
+        //set new Alarmmanager
+        setAlarm(getTimeDifferenceInMillisecs());
         // then change to main menu
         setContentView(R.layout.mainmenu);
         setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
     }
+
+
+
     public void button_time_back(View view){
         setContentView(R.layout.mainmenu);
         setButtonDisabled(R.id.goto_question_button, _control.wasLastQuestionAnswered());
@@ -236,8 +246,11 @@ public class MainActivity extends Activity {
         PendingIntent next = PendingIntent.getActivity(getApplicationContext(), 0, nextActivityIntent, 0);
 
         // alarmanager setzen
-        AlarmManager alarmManager= (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + timeDifference, next);
+    }
+    private void clearAlarm() {
+        PendingIntent cancelActivitiy = PendingIntent.getActivity(getApplicationContext(), 0, getIntent(), 0);
+        alarmManager.cancel(cancelActivitiy);
     }
     private int calcTimeAlarm() {
         Time now = new Time();

@@ -1,5 +1,7 @@
 package de.ovgu.swe_projekt.socialdoc;
 
+import android.app.AlarmManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.format.Time;
 

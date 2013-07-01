@@ -44,17 +44,22 @@ public class MainActivity extends Activity {
             v.vibrate(500);
         }catch (Exception e) {}
 
-        // check if a the probandencode.csv exists and create it (and a new user) if it doesn't
+        // check if the probandencode.csv exists and create it (and a new user) if it doesn't
         if( _control.createCSV() ) {
-            setContentView(R.layout.mainmenu);
-            Helper.setButtonDisabled(findViewById(R.id.goto_question_button),
-                                     _control.wasLastQuestionAnswered());
+            if(_control.probandenCodeIsEmpty()) {
+                setContentView(R.layout.proband_code);
+            } else {
+                setContentView(R.layout.mainmenu);
+                Helper.setButtonDisabled(findViewById(R.id.goto_question_button),
+                                         _control.wasLastQuestionAnswered());
+            }
         } else {
-            _control.saveUserData();
             setContentView(R.layout.proband_code);
         }
 
-        setAlarm(Helper.getTimeDifferenceInMillisecs(_control.getUserTimes()));
+        // only call this if the app was opened by an alarm!
+        if( _control.isAlarmTime(SystemClock.elapsedRealtime()) )
+            setAlarm(Helper.getTimeDifferenceInMillisecs(_control), true);
     }
     @Override
     public void onBackPressed() {
@@ -94,11 +99,7 @@ public class MainActivity extends Activity {
 
     public void button_menu_to_quest(View view){
         setContentView(R.layout.question);
-        // todo: generate the correct question text using information taken from UserData and display it
-        // that means:
-        // find out if the last answer was given yesterday or x days ago
-        // find out what time the last answer was given at
-        Helper.setQuestion("heute schon", findViewById(R.id.question));
+        Helper.setQuestion(_control.generateQuestionText(), findViewById(R.id.question));
     }
     public void button_menu_to_time(View view){
         setContentView(R.layout.set_time);
@@ -142,11 +143,19 @@ public class MainActivity extends Activity {
         times[3] = Helper.getTimeFromSpinner(findViewById(R.id.spinner_termin4));
         // and update the user data
         _control.updateUserTimes(times);
+        // set the next alarm to the next possible time
+        setAlarm(Helper.getTimeDifferenceInMillisecs(_control), false);
         _control.saveUserData();
-        // then change to main menu
-        setContentView(R.layout.mainmenu);
-        Helper.setButtonDisabled(findViewById(R.id.goto_question_button),
-                                 _control.wasLastQuestionAnswered());
+        // then change to main menu if user did already answer at least one question, else to question
+        if( _control.userAnsweredAQuestion() ) {
+            setContentView(R.layout.mainmenu);
+            Helper.setButtonDisabled(findViewById(R.id.goto_question_button),
+                                     _control.wasLastQuestionAnswered());
+        }
+        else {
+            setContentView(R.layout.question);
+            Helper.setQuestion(_control.generateQuestionText(), findViewById(R.id.question));
+        }
     }
     public void button_time_back(View view){
         setContentView(R.layout.mainmenu);
@@ -166,12 +175,14 @@ public class MainActivity extends Activity {
         setContentView(R.layout.set_time);
     }
 
-    private void setAlarm(long timeDifference){
-        if (!_control.wasLastQuestionAnswered())
-            _control.saveUserInputToCSV(true,"","","");
-        Time now = new Time(Time.getCurrentTimezone());
-        now.setToNow();
-        _control.changeLastAlarm(now);
+    private void setAlarm(long timeDifference, boolean triggeredByAlarm){
+        if(triggeredByAlarm) {
+            if (!_control.wasLastQuestionAnswered())
+                _control.saveUserInputToCSV(true,"","","");
+            Time now = new Time(Time.getCurrentTimezone());
+            now.setToNow();
+            _control.changeLastAlarm(now);
+        }
         Intent nextActivityIntent = new Intent(this, MainActivity.class);
 
         PendingIntent next = PendingIntent.getActivity(getApplicationContext(), 0, nextActivityIntent, 0);
@@ -179,5 +190,6 @@ public class MainActivity extends Activity {
         // alarmanager setzen
         AlarmManager alarmManager = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + timeDifference, next);
+        _control.setNextAlarmAt(SystemClock.elapsedRealtime() + timeDifference);
     }
 }

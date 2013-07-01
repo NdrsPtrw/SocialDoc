@@ -241,8 +241,10 @@ public class MainActivity extends Activity {
     }
     private int calcTimeAlarm() {
         Time now = new Time();
+        now.setToNow();
         int[] userTimes = _control.getUserTimes().clone();
         int hourNextAlarm = userTimes[0];
+        if (hourNextAlarm == -77) return 3;
         int minHourDifference = 24;
 
         for (int i = 0; i < 3; i++){
@@ -250,6 +252,11 @@ public class MainActivity extends Activity {
             if (temp < minHourDifference && temp > 0){
                 minHourDifference = temp;
                 hourNextAlarm = userTimes[i];
+                //check if alarm Hour is actual Hour
+                if (hourNextAlarm == now.hour){
+                    hourNextAlarm = userTimes[i+1 % 4];
+                }
+
             }
         }
         return hourNextAlarm;

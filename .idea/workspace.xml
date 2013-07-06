@@ -55,8 +55,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <method_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -93,6 +91,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <method_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -102,25 +102,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="264" column="32" selection-start="10692" selection-end="10721" vertical-scroll-proportion="-14.153846" vertical-offset="3780" max-vertical-offset="4301">
-              <folding>
-                <element signature="e#3571#3774#0" expanded="true" />
-                <element signature="e#3755#3756#0" expanded="true" />
-              </folding>
+            <state line="136" column="45" selection-start="4543" selection-end="4543" vertical-scroll-proportion="0.4235925" vertical-offset="1780" max-vertical-offset="4352">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Helper.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Helper.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Helper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="19" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2737">
+            <state line="20" column="7" selection-start="682" selection-end="682" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2737">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2949#2979#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -129,7 +125,7 @@
       <file leaf-file-name="Control.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Control.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="16" selection-start="2877" selection-end="2877" vertical-scroll-proportion="0.0" vertical-offset="1403" max-vertical-offset="4760">
+            <state line="258" column="54" selection-start="9506" selection-end="9506" vertical-scroll-proportion="0.0" vertical-offset="3348" max-vertical-offset="5168">
               <folding />
             </state>
           </provider>
@@ -138,7 +134,7 @@
       <file leaf-file-name="UserData.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/UserData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="89" selection-start="7249" selection-end="7249" vertical-scroll-proportion="0.0" vertical-offset="3346" max-vertical-offset="3910">
+            <state line="219" column="89" selection-start="7249" selection-end="7249" vertical-scroll-proportion="0.0" vertical-offset="3349" max-vertical-offset="3910">
               <folding />
             </state>
           </provider>
@@ -162,10 +158,10 @@
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/layout/question.xml" />
         <option value="$PROJECT_DIR$/res/layout/set_time.xml" />
-        <option value="$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Control.java" />
         <option value="$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/UserData.java" />
         <option value="$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Helper.java" />
+        <option value="$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java" />
+        <option value="$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Control.java" />
       </list>
     </option>
   </component>
@@ -175,8 +171,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1296" />
-    <option name="height" value="1000" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -223,6 +219,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -261,23 +259,21 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SHOW_ALL_PROCESSES" value="false" />
-    <property name="DEBUGGABLE_PROCESS" value="de.ovgu.swe_projekt.socialdoc" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="DEBUGGABLE_PROCESS" value="de.ovgu.swe_projekt.socialdoc" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="DEBUGGABLE_DEVICE" value="emulator-5554 (MyAvd0)" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="DEBUGGABLE_DEVICE" value="emulator-5554 (MyAvd0)" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -450,7 +446,7 @@
     <option name="totallyTimeSpent" value="25762000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14797136" sideWeight="0.5718085" order="0" side_tool="false" content_ui="tabs" />
@@ -463,34 +459,34 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24525745" sideWeight="0.4268617" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24482448" sideWeight="0.4268617" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2965599" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977462" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2617504" sideWeight="0.6797153" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26136363" sideWeight="0.67972744" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299458" sideWeight="0.67021275" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24797407" sideWeight="0.67250437" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3202847" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24772727" sideWeight="0.67972744" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32027256" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12569611" sideWeight="0.6773163" order="5" side_tool="false" content_ui="tabs" x="92" y="92" width="1096" height="800" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.67449665" order="6" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3387534" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2965599" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14797136" sideWeight="0.5718085" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12641816" sideWeight="0.67141163" order="0" side_tool="false" content_ui="tabs" x="92" y="92" width="1096" height="800" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14797136" sideWeight="0.5718085" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32858837" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24482448" sideWeight="0.4268617" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24482448" sideWeight="0.4268617" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.67141163" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32858837" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32858837" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10739857" sideWeight="0.67021275" order="4" side_tool="false" content_ui="tabs" x="954" y="113" width="486" height="504" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -651,12 +647,11 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19482" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Helper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="264" column="32" selection-start="10692" selection-end="10721" vertical-scroll-proportion="-14.153846" vertical-offset="3780" max-vertical-offset="4301">
+        <state line="20" column="7" selection-start="682" selection-end="682" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2737">
           <folding>
-            <element signature="e#3571#3774#0" expanded="true" />
-            <element signature="e#3755#3756#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -670,18 +665,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Control.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="16" selection-start="2877" selection-end="2877" vertical-scroll-proportion="0.0" vertical-offset="1403" max-vertical-offset="4760">
+        <state line="258" column="54" selection-start="9506" selection-end="9506" vertical-scroll-proportion="0.0" vertical-offset="3348" max-vertical-offset="5168">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/Helper.java">
+    <entry file="file://$PROJECT_DIR$/src/de/ovgu/swe_projekt/socialdoc/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="19" selection-start="332" selection-end="332" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2737">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2949#2979#1" expanded="true" />
-          </folding>
+        <state line="136" column="45" selection-start="4543" selection-end="4543" vertical-scroll-proportion="0.4235925" vertical-offset="1780" max-vertical-offset="4352">
+          <folding />
         </state>
       </provider>
     </entry>

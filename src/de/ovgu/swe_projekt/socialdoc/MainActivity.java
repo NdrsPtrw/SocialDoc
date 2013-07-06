@@ -157,10 +157,12 @@ public class MainActivity extends Activity {
         numMinutes = Helper.getEditText((EditText)findViewById(R.id.editText_minutes));
 
         // only 60 minutes per hour
-        if( Integer.parseInt(numMinutes) > 59 )
+        if( Integer.parseInt(numMinutes) > 59 ){
+            dialog.show();
             return;
+        }
         if( !_control.isQuestionInputOK(numHours+":"+numMinutes) ){
-            // todo: display popup with warning
+            dialog.show();
             return;
         }
         try{
@@ -226,7 +228,7 @@ public class MainActivity extends Activity {
         String codePart3 = Helper.getEditText((EditText)findViewById(R.id.pc_3));
         String codePart4 = Helper.getEditText((EditText)findViewById(R.id.pc_4));
         String codePart5 = Helper.getEditText((EditText)findViewById(R.id.pc_5));
-        // ToDo: check if all are actually characters
+        // check if all are actually characters
         // (and not numbers/other symbols)
         String code = codePart1+codePart2+codePart3+codePart4+codePart5;
         char[] chars = code.toCharArray();

@@ -139,7 +139,6 @@ public class Control {
 	        long diff = d2.getTime() - d1.getTime();      
 	        diffmin = diff / (60 * 1000);
 		} catch (java.text.ParseException e) {
-			// TODO Auto-generated catch block
 		}
                    
     	
@@ -257,6 +256,7 @@ public class Control {
 
     /**
      * Writes the input to the Probandencode.csv (as a single line).
+     * This method is missing proper error handling...
      * @param input line to write to the file
      * @param newFile create a new file or add to an existing file?
      * @return true, if the file Probandencode.csv already exists
@@ -285,12 +285,8 @@ public class Control {
                         fileExists = false;
                     }
                     else {
-                        //ToDo: error handling - this state should not occur; display error message
-                        // ask user to restart app
                     }
                 } catch (IOException e) {
-                    //ToDo: check for exceptions
-                    // display error: ask user to restart app -> should create the file
                 }
             } finally {
                 if (fOut != null) {
@@ -298,16 +294,11 @@ public class Control {
                         fOut.flush();
                         fOut.close();
                     } catch (IOException e) {
-                        //ToDo: check for exceptions
-                        // display error: ask user to restart app -> should create the file
                     }
                 }
             }
         }
         else {
-            // TODO: Error handling: No Storage Device Mounted
-            // display error: data not saved
-            // have user reenter/give user opportunity to reenter
         }
         return fileExists;
     }

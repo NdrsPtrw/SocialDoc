@@ -10,7 +10,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Medium Text"
             android:id="@+id/question"
-            android:editable = "true"
             android:layout_gravity="left|center_vertical"/>
 
     <TextView

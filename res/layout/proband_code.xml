@@ -37,7 +37,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:ems="1"
+                android:ems="2"
+                android:digits="qwertzuiopasdfghjklyxcvbnm"
+                android:maxLength="1"
                 android:id="@+id/pc_1"/>
 
         <requestFocus />
@@ -46,28 +48,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:inputType="textPersonName"
-                android:ems="1"
+                android:ems="2"
+                android:digits="qwertzuiopasdfghjklyxcvbnm"
+                android:maxLength="1"
                 android:id="@+id/pc_2"/>
 
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:inputType="textPersonName"
-                android:ems="1"
+                android:ems="2"
+                android:digits="qwertzuiopasdfghjklyxcvbnm"
+                android:maxLength="1"
                 android:id="@+id/pc_3"/>
 
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:inputType="textPersonName"
-                android:ems="1"
+                android:ems="2"
+                android:digits="qwertzuiopasdfghjklyxcvbnm"
+                android:maxLength="1"
                 android:id="@+id/pc_4"/>
 
         <EditText
                 android:id="@+id/pc_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="1"
+                android:ems="2"
+                android:digits="qwertzuiopasdfghjklyxcvbnm"
+                android:maxLength="1"
                 android:inputType="textPersonName" >
 
         </EditText>

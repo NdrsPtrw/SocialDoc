@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
      * Control class handling the app's data.
      */
     protected Control _control;
+    private AlertDialog dialog;
 
     /**
      * Create control class when app is created.
@@ -42,7 +43,7 @@ public class MainActivity extends Activity {
         // set up control
         _control = new Control(getSharedPreferences("PsyAppPreferences", 0));
         super.onCreate(savedInstanceState);
-
+        initAlert();
     }
 
     /**
@@ -94,14 +95,9 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Show error message.
-     * @param id standard android parameter
-     * @return the dialog
+     * Create error message.
      */
-    @Override       //Fehlermeldungen
-    protected Dialog onCreateDialog(int id){
-        switch(id){
-            case 10:
+    protected void initAlert(){
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
                 builder.setCancelable(true);
@@ -111,10 +107,7 @@ public class MainActivity extends Activity {
                     }
                 });
 
-                AlertDialog dialog = builder.create();
-                dialog.show();
-        }
-        return super.onCreateDialog(id);
+                dialog = builder.create();
     }
 
     /**
@@ -235,8 +228,18 @@ public class MainActivity extends Activity {
         String codePart5 = Helper.getEditText((EditText)findViewById(R.id.pc_5));
         // ToDo: check if all are actually characters
         // (and not numbers/other symbols)
-        _control.newUser( codePart1+codePart2+codePart3+codePart4+codePart5 );
-        setContentView(R.layout.set_time);
+        String code = codePart1+codePart2+codePart3+codePart4+codePart5;
+        char[] chars = code.toCharArray();
+        boolean letters = true;
+        for (char c : chars) 
+            if(!Character.isLetter(c)) 
+                letters = false;            
+        
+        if(code.length()==5 && letters){
+	        _control.newUser( codePart1+codePart2+codePart3+codePart4+codePart5 );
+	        setContentView(R.layout.set_time);
+        }else
+            dialog.show();
     }
 
     /**

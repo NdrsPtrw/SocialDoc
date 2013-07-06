@@ -1,8 +1,13 @@
 package de.ovgu.swe_projekt.socialdoc;
 
 import android.content.SharedPreferences;
+import android.net.ParseException;
 import android.os.Environment;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
 import android.text.format.Time;
 
 /**
@@ -108,6 +113,38 @@ public class Control {
         if( difference < 0 ) difference *= -1;
         return difference < 4000;
     }
+    
+    /**
+     * Check the time difference between now and the last answered question
+     * @return time difference in minutes
+     */
+    public long getTimeSinceLastAnswer() {
+        String timeAtLastAnswer = _userData.getTimeAtLastAnsweredAlarm(); // format: dd.mm.yyyy;hh:mm
+        Time now = new Time(Time.getCurrentTimezone());
+        now.setToNow();
+        
+        String dateStart = timeAtLastAnswer.replace('.', '/').replace(';', ' ')+":00";
+        String dateStop = now.monthDay+"/"+now.month+"/"+now.year+" "+now.hour+":"+now.minute+":00";
+
+        // Custom date format
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+        
+        long diffmin = 24;
+        Date d1 = null;
+        Date d2 = null;
+        
+        try {
+			d1 = format.parse(dateStart);
+			d2 = format.parse(dateStop);
+	        long diff = d2.getTime() - d1.getTime();      
+	        diffmin = diff / (60 * 1000);
+		} catch (java.text.ParseException e) {
+			// TODO Auto-generated catch block
+		}
+                   
+    	
+    	return diffmin;
+    }
 
     /**
      * Check the user input given for the current question.
@@ -116,12 +153,13 @@ public class Control {
      * @return true, if the input is a possible amount of time
      */
     public boolean isQuestionInputOK(String input) {
-        // todo: check the input (format: h:m) -  make sure this much time can have passed since last answer
-        String timeAtLastAnswer = _userData.getTimeAtLastAnsweredAlarm(); // format: dd.mm.yyyy;hh:mm
-        Time now = new Time(Time.getCurrentTimezone());
-        now.setToNow();
-        // work with day, month, hours, minutes
-        return true;
+        Scanner scanner = new Scanner(input.replace(':', ' ')); 
+        int min = scanner.nextInt()*60;
+        min+=scanner.nextInt();
+        if(getTimeSinceLastAnswer()>min)
+        	return true;
+        else 
+        	return false; 
     }
 
     /**

@@ -32,6 +32,10 @@ public class MainActivity extends Activity {
      * Control class handling the app's data.
      */
     protected Control _control;
+
+    /**
+     * Dialog displayed if the user input is invalid.
+     */
     private AlertDialog dialog;
 
     /**
@@ -100,16 +104,16 @@ public class MainActivity extends Activity {
      * Create error message.
      */
     protected void initAlert(){
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-                builder.setCancelable(true);
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
-                    }
-                });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
+        builder.setCancelable(true);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked OK button
+            }
+        });
 
-                dialog = builder.create();
+        dialog = builder.create();
     }
 
     /**
@@ -265,7 +269,6 @@ public class MainActivity extends Activity {
         Intent nextActivityIntent = new Intent(this, MainActivity.class);
 
         PendingIntent next = PendingIntent.getActivity(getApplicationContext(), 0, nextActivityIntent, 0);
-
         // alarmanager setzen
         AlarmManager alarmManager = (AlarmManager)(this.getSystemService( Context.ALARM_SERVICE ));
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + timeDifference, next);

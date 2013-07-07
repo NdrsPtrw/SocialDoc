@@ -58,15 +58,17 @@ public class MainActivity extends Activity {
     protected void onStart(){
         super.onStart();
 
-        try
-        {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-            r.play();
-            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            // Vibrate for 500 milliseconds
-            v.vibrate(500);
-        }catch (Exception e) {}
+        if( _control.isAlarmTime(SystemClock.elapsedRealtime()) ) {
+            try
+            {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 500 milliseconds
+                v.vibrate(500);
+            }catch (Exception e) {}
+        }
 
         // check if the probandencode.csv exists and create it (and a new user) if it doesn't
         if( _control.createCSV() ) {
